@@ -1,4 +1,4 @@
-﻿// â”€â”€ PAGE NAVIGATION â”€â”€
+// ── PAGE NAVIGATION ──
 function goPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -15,7 +15,7 @@ function initPage(id){
   if(id==='page-hospital') buildBedGrid();
 }
 
-// â”€â”€ REGISTRATION â”€â”€
+// ── REGISTRATION ──
 let selectedRole='patient';
 function selectRole(r){
   selectedRole=r;
@@ -32,7 +32,7 @@ function handleRegister(){
   },1200);
 }
 
-// â”€â”€ LOGIN â”€â”€
+// ── LOGIN ──
 function switchLoginTab(type,btn){
   document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
@@ -47,21 +47,21 @@ function handleLogin(type){
   },900);
 }
 
-// â”€â”€ PATIENT DASHBOARD PANELS â”€â”€
+// ── PATIENT DASHBOARD PANELS ──
 function showPanel(id,btn){
   document.querySelectorAll('#page-patient .dash-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if(btn){document.querySelectorAll('#page-patient .sidebar-item').forEach(s=>s.classList.remove('active'));btn.classList.add('active');}
 }
 
-// â”€â”€ HOSPITAL DASHBOARD PANELS â”€â”€
+// ── HOSPITAL DASHBOARD PANELS ──
 function showHPanel(id,btn){
   document.querySelectorAll('#page-hospital .dash-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if(btn){document.querySelectorAll('#page-hospital .sidebar-item').forEach(s=>s.classList.remove('active'));btn.classList.add('active');}
 }
 
-// â”€â”€ BED GRID â”€â”€
+// ── BED GRID ──
 function buildBedGrid(){
   const g=document.getElementById('bed-grid');
   if(!g||g.children.length)return;
@@ -70,13 +70,13 @@ function buildBedGrid(){
     const b=document.createElement('div');
     b.className='bed-cell bed-'+s;
     b.textContent='B'+(i+1);
-    b.title='Bed '+(i+1)+' â€” '+s;
+    b.title='Bed '+(i+1)+' — '+s;
     b.onclick=()=>showToast('Bed '+(i+1)+': '+s);
     g.appendChild(b);
   });
 }
 
-// â”€â”€ HOW IT WORKS â”€â”€
+// ── HOW IT WORKS ──
 let currentStep=0;
 function setStep(idx,el){
   document.querySelectorAll('.hiw-step').forEach(s=>s.classList.remove('active'));
@@ -89,27 +89,27 @@ setInterval(()=>{
   const next=(currentStep+1)%steps.length;setStep(next,steps[next]);
 },3500);
 
-// â”€â”€ FOR WHO â”€â”€
+// ── FOR WHO ──
 function switchTab(type,btn){
   document.querySelectorAll('.fw-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.fw-content').forEach(c=>c.classList.remove('active'));
   btn.classList.add('active');document.getElementById('fw-'+type).classList.add('active');
 }
 
-// â”€â”€ CTA â”€â”€
+// ── CTA ──
 function handleCTA(btn){
   const inputs=btn.parentElement.querySelectorAll('input');let ok=true;
   inputs.forEach(i=>{if(!i.value.trim()){i.style.borderColor='#F87171';setTimeout(()=>i.style.borderColor='',2000);ok=false;}});
-  if(ok){btn.textContent='Sent âœ“';btn.style.background='#16A34A';document.getElementById('cta-success').style.display='block';inputs.forEach(i=>i.value='');}
+  if(ok){btn.textContent='Sent ✓';btn.style.background='#16A34A';document.getElementById('cta-success').style.display='block';inputs.forEach(i=>i.value='');}
 }
 
-// â”€â”€ TOAST â”€â”€
+// ── TOAST ──
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-// â”€â”€ HERO 3D TILT â”€â”€
+// ── HERO 3D TILT ──
 const tilt=document.getElementById('tiltCard');
 if(tilt){
   const p=tilt.closest('.hero-visual');
@@ -122,19 +122,19 @@ if(tilt){
   p.addEventListener('mouseleave',()=>{tilt.style.transform='';});
 }
 
-// â”€â”€ NAV SCROLL â”€â”€
+// ── NAV SCROLL ──
 window.addEventListener('scroll',()=>{
   document.getElementById('navbar')&&document.getElementById('navbar').classList.toggle('scrolled',scrollY>20);
 });
 
-// â”€â”€ PARALLAX ORBS â”€â”€
+// ── PARALLAX ORBS ──
 window.addEventListener('scroll',()=>{
   document.querySelectorAll('.orb').forEach((o,i)=>{o.style.transform=`translateY(${scrollY*(0.08+i*0.04)}px)`;});
 });
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ══════════════════════════════════════
 // E-HOSPITEE DATABASE (IndexedDB + localStorage)
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ══════════════════════════════════════
 const DB = {
   _prefix: 'ehospitee_',
   _idb: null,
@@ -169,7 +169,7 @@ const DB = {
     await this.add('patients', {
       firstName:'Rajesh', lastName:'Kumar', email:'rajesh@demo.com',
       mobile:'+91 98765 43210', dob:'1985-06-15', bloodGroup:'B+',
-      allergies:'Penicillin', emergencyContact:'Priya Kumar â€” +91 98765 12345',
+      allergies:'Penicillin', emergencyContact:'Priya Kumar — +91 98765 12345',
       password:'demo123', createdAt: new Date().toISOString()
     });
 
@@ -177,7 +177,7 @@ const DB = {
     await this.add('hospitals', {
       name:'Apollo Hospitals', regNo:'MCI-HYD-2024-00123',
       email:'admin@apollo.com', password:'demo123',
-      address:'Film Nagar, Jubilee Hills, Hyderabad â€” 500033',
+      address:'Film Nagar, Jubilee Hills, Hyderabad — 500033',
       phone:'+91 40 2360 7777', emergencyPhone:'+91 40 2360 0000',
       specialties:'Cardiology, Orthopaedics, Neurology, General Medicine',
       totalBeds:52, createdAt: new Date().toISOString()
@@ -195,7 +195,7 @@ const DB = {
     // Health records
     const recs = [
       { patientId:1, name:'Lipid Profile Report', type:'lab', hospital:'Apollo Hospitals', date:'2026-03-08', file:null },
-      { patientId:1, name:'Prescription â€” Dr. Rao', type:'prescription', hospital:'Apollo Hospitals', date:'2026-02-12', file:null },
+      { patientId:1, name:'Prescription — Dr. Rao', type:'prescription', hospital:'Apollo Hospitals', date:'2026-02-12', file:null },
       { patientId:1, name:'Complete Blood Count', type:'lab', hospital:'KIMS Hospital', date:'2026-01-10', file:null },
       { patientId:1, name:'ECG Report', type:'report', hospital:'Apollo Hospitals', date:'2025-12-22', file:null },
       { patientId:1, name:'Discharge Summary', type:'summary', hospital:'Yashoda Hospital', date:'2025-11-15', file:null },
@@ -212,12 +212,12 @@ const DB = {
 
     // Vitals
     await this.add('vitals', {
-      patientId:1, heartRate:'72 bpm', bp:'120/80', temp:'36.8Â°C',
+      patientId:1, heartRate:'72 bpm', bp:'120/80', temp:'36.8°C',
       sugar:'98 mg/dL', weight:'72 kg', spo2:'98%',
       recordedAt: new Date().toISOString()
     });
 
-    showToast('âœ… Database initialised with demo data');
+    showToast('✅ Database initialised with demo data');
   },
 
   async _loadSession() {
@@ -226,7 +226,6 @@ const DB = {
       const session = JSON.parse(s);
       currentUser = session;
       if (session.role === 'patient') {
-        // Re-fetch fresh user data from DB
         const user = await this.get('patients', session.id);
         if (user) {
           currentUser = { ...user, role: 'patient' };
@@ -325,7 +324,7 @@ let currentUser = null;
 // Init DB on load
 DB.init().catch(e => console.error('DB init failed:', e));
 
-// â”€â”€ REGISTRATION (DB-connected) â”€â”€
+// ── REGISTRATION (DB-connected) ──
 async function handleRegister() {
   const btn = document.getElementById('reg-btn');
   btn.textContent = 'Creating account...';
@@ -335,37 +334,37 @@ async function handleRegister() {
     if (selectedRole === 'patient') {
       const inputs = document.querySelectorAll('#reg-patient-form input, #reg-patient-form select');
       const [firstName, lastName, mobile, email, dob, bloodGroup, password, confirmPw] = [...inputs].map(i => i.value.trim());
-      if (!firstName || !email || !password) { showToast('âš ï¸ Please fill all required fields'); btn.textContent='Create Account â†’'; btn.disabled=false; return; }
-      if (password !== confirmPw) { showToast('âš ï¸ Passwords do not match'); btn.textContent='Create Account â†’'; btn.disabled=false; return; }
+      if (!firstName || !email || !password) { showToast('⚠️ Please fill all required fields'); btn.textContent='Create Account →'; btn.disabled=false; return; }
+      if (password !== confirmPw) { showToast('⚠️ Passwords do not match'); btn.textContent='Create Account →'; btn.disabled=false; return; }
       const existing = await DB.findByEmail('patients', email);
-      if (existing) { showToast('âš ï¸ Email already registered'); btn.textContent='Create Account â†’'; btn.disabled=false; return; }
+      if (existing) { showToast('⚠️ Email already registered'); btn.textContent='Create Account →'; btn.disabled=false; return; }
       const id = await DB.add('patients', { firstName, lastName, mobile, email, dob, bloodGroup, password, allergies:'', emergencyContact:'', createdAt: new Date().toISOString() });
       const user = await DB.get('patients', id);
       DB.setSession(user, 'patient');
       document.getElementById('patient-name').textContent = firstName;
       document.getElementById('sidebar-patient-name').textContent = firstName + ' ' + lastName;
-      showToast('âœ… Account created successfully!');
+      showToast('✅ Account created successfully!');
       setTimeout(() => goPage('page-patient'), 800);
 
     } else {
       const inputs = document.querySelectorAll('#reg-hospital-form input');
       const [name, regNo, city, pincode, contactPerson, email, phone, password] = [...inputs].map(i => i.value.trim());
-      if (!name || !email || !password) { showToast('âš ï¸ Please fill all required fields'); btn.textContent='Create Account â†’'; btn.disabled=false; return; }
+      if (!name || !email || !password) { showToast('⚠️ Please fill all required fields'); btn.textContent='Create Account →'; btn.disabled=false; return; }
       const existing = await DB.findByEmail('hospitals', email);
-      if (existing) { showToast('âš ï¸ Email already registered'); btn.textContent='Create Account â†’'; btn.disabled=false; return; }
+      if (existing) { showToast('⚠️ Email already registered'); btn.textContent='Create Account →'; btn.disabled=false; return; }
       await DB.add('hospitals', { name, regNo, city, pincode, contactPerson, email, phone, password, createdAt: new Date().toISOString() });
       DB.setSession({ name, email }, 'hospital');
-      showToast('âœ… Hospital account created!');
+      showToast('✅ Hospital account created!');
       setTimeout(() => goPage('page-hospital'), 800);
     }
   } catch(e) {
-    showToast('âš ï¸ Registration failed. Try again.');
+    showToast('⚠️ Registration failed. Try again.');
     console.error(e);
   }
-  btn.textContent = 'Create Account â†’'; btn.disabled = false;
+  btn.textContent = 'Create Account →'; btn.disabled = false;
 }
 
-// â”€â”€ LOGIN (DB-connected) â”€â”€
+// ── LOGIN (DB-connected) ──
 async function handleLogin(type) {
   if (type === 'demo-patient') {
     const user = await DB.findByEmail('patients', 'rajesh@demo.com');
@@ -380,7 +379,7 @@ async function handleLogin(type) {
     const pw = document.getElementById('login-pw').value.trim();
     const all = await DB.getAll('patients');
     const user = all.find(u => (u.email === id || u.mobile === id) && u.password === pw);
-    if (!user) { showToast('âš ï¸ Invalid credentials'); return; }
+    if (!user) { showToast('⚠️ Invalid credentials'); return; }
     DB.setSession(user, 'patient');
     await loadPatientDash(user);
     goPage('page-patient');
@@ -390,7 +389,7 @@ async function handleLogin(type) {
     const id = document.getElementById('hosp-login-id').value.trim();
     const pw = document.getElementById('hosp-login-pw').value.trim();
     const hosp = await DB.findByEmail('hospitals', id);
-    if (!hosp || hosp.password !== pw) { showToast('âš ï¸ Invalid credentials'); return; }
+    if (!hosp || hosp.password !== pw) { showToast('⚠️ Invalid credentials'); return; }
     DB.setSession(hosp, 'hospital');
     goPage('page-hospital');
     return;
@@ -428,8 +427,8 @@ function renderAppointments(appts) {
   if (ovUp) {
     ovUp.innerHTML = upcoming.length ? upcoming.map(a => `
       <div class="appt-row">
-        <div class="appt-avatar2">ðŸ©º</div>
-        <div class="appt-info"><div class="appt-doc">${a.doctor} â€” ${a.specialty}</div><div class="appt-spec">${a.hospital} Â· ${a.date} Â· ${a.time}</div></div>
+        <div class="appt-avatar2">🩺</div>
+        <div class="appt-info"><div class="appt-doc">${a.doctor} — ${a.specialty}</div><div class="appt-spec">${a.hospital} · ${a.date} · ${a.time}</div></div>
         <span class="status-badge status-upcoming">Upcoming</span>
       </div>`).join('') : '<div style="color:var(--ink-light);font-size:.85rem;padding:12px 0">No upcoming appointments</div>';
   }
@@ -438,16 +437,16 @@ function renderAppointments(appts) {
   const apptUp = document.getElementById('appt-upcoming');
   if (apptUp) apptUp.innerHTML = upcoming.length ? upcoming.map(a => `
     <div class="appt-row">
-      <div class="appt-avatar2">ðŸ©º</div>
-      <div class="appt-info"><div class="appt-doc">${a.doctor} â€” ${a.specialty}</div><div class="appt-spec">${a.hospital} Â· ${a.date} Â· ${a.time}</div></div>
+      <div class="appt-avatar2">🩺</div>
+      <div class="appt-info"><div class="appt-doc">${a.doctor} — ${a.specialty}</div><div class="appt-spec">${a.hospital} · ${a.date} · ${a.time}</div></div>
       <span class="status-badge status-upcoming">Upcoming</span>
     </div>`).join('') : '<div style="color:var(--ink-light);font-size:.85rem;padding:12px 0">No upcoming appointments</div>';
 
   const apptPast = document.getElementById('appt-past');
   if (apptPast) apptPast.innerHTML = past.length ? past.map(a => `
     <div class="appt-row">
-      <div class="appt-avatar2">ðŸ©º</div>
-      <div class="appt-info"><div class="appt-doc">${a.doctor} â€” ${a.specialty}</div><div class="appt-spec">${a.hospital} Â· ${a.date}</div></div>
+      <div class="appt-avatar2">🩺</div>
+      <div class="appt-info"><div class="appt-doc">${a.doctor} — ${a.specialty}</div><div class="appt-spec">${a.hospital} · ${a.date}</div></div>
       <span class="status-badge status-${a.status}">${a.status.charAt(0).toUpperCase()+a.status.slice(1)}</span>
     </div>`).join('') : '<div style="color:var(--ink-light);font-size:.85rem;padding:12px 0">No past appointments</div>';
 
@@ -457,11 +456,11 @@ function renderAppointments(appts) {
 }
 
 function renderRecords(recs) {
-  const icons = { lab:'ðŸ§ª', prescription:'ðŸ©º', report:'ðŸ“„', summary:'ðŸ“‹' };
+  const icons = { lab:'🧪', prescription:'🩺', report:'📄', summary:'📋' };
   const html = recs.length ? recs.map(r => `
     <div class="record-item">
-      <div class="record-icon">${icons[r.type]||'ðŸ“„'}</div>
-      <div><div class="record-name">${r.name}</div><div class="record-date">${r.hospital} Â· ${r.date}</div></div>
+      <div class="record-icon">${icons[r.type]||'📄'}</div>
+      <div><div class="record-name">${r.name}</div><div class="record-date">${r.hospital} · ${r.date}</div></div>
       <button class="record-btn" onclick="showToast('Opening ${r.name}...')">View</button>
     </div>`).join('') : '<div style="color:var(--ink-light);font-size:.85rem;padding:12px 0">No records found</div>';
 
@@ -470,8 +469,8 @@ function renderRecords(recs) {
   const ovRec = document.getElementById('overview-records');
   if (ovRec) ovRec.innerHTML = recs.slice(0,2).map(r=>`
     <div class="record-item">
-      <div class="record-icon">${icons[r.type]||'ðŸ“„'}</div>
-      <div><div class="record-name">${r.name}</div><div class="record-date">${r.hospital} Â· ${r.date}</div></div>
+      <div class="record-icon">${icons[r.type]||'📄'}</div>
+      <div><div class="record-name">${r.name}</div><div class="record-date">${r.hospital} · ${r.date}</div></div>
       <button class="record-btn" onclick="showToast('Opening...')">View</button>
     </div>`).join('');
 
@@ -483,8 +482,8 @@ function renderMedications(meds) {
   const active = meds.filter(m => m.active);
   const html = active.length ? active.map(m => `
     <div class="med-item">
-      <div class="med-icon">ðŸ’Š</div>
-      <div><div class="med-name">${m.name}</div><div class="med-dose">${m.dose} Â· ${m.frequency} Â· By ${m.prescribedBy}</div></div>
+      <div class="med-icon">💊</div>
+      <div><div class="med-name">${m.name}</div><div class="med-dose">${m.dose} · ${m.frequency} · By ${m.prescribedBy}</div></div>
       <div class="med-time">${m.time}</div>
     </div>`).join('') : '<div style="color:var(--ink-light);font-size:.85rem;padding:12px 0">No active medications</div>';
 
@@ -501,7 +500,7 @@ function renderVitals(v) {
   Object.entries(map).forEach(([id, val]) => { const el=document.getElementById(id); if(el) el.textContent = val; });
 }
 
-// â”€â”€ SAVE PROFILE (DB) â”€â”€
+// ── SAVE PROFILE (DB) ──
 async function saveProfile() {
   if (!currentUser || currentUser.role !== 'patient') return;
   const updated = {
@@ -519,25 +518,25 @@ async function saveProfile() {
   DB.setSession(updated, 'patient');
   document.getElementById('patient-name').textContent = updated.firstName;
   document.getElementById('sidebar-patient-name').textContent = updated.firstName + ' ' + updated.lastName;
-  showToast('âœ… Profile saved to database!');
+  showToast('✅ Profile saved to database!');
 }
 
-// â”€â”€ ADD MEDICATION (DB) â”€â”€
+// ── ADD MEDICATION (DB) ──
 async function addMedication() {
   if (!currentUser) return;
   const name = document.getElementById('new-med-name').value.trim();
   const dose = document.getElementById('new-med-dose').value.trim();
   const freq = document.getElementById('new-med-freq').value.trim();
   const time = document.getElementById('new-med-time').value.trim();
-  if (!name) { showToast('âš ï¸ Enter medication name'); return; }
+  if (!name) { showToast('⚠️ Enter medication name'); return; }
   await DB.add('medications', { patientId: currentUser.id, name, dose, frequency: freq, time, prescribedBy:'Self', active: true, createdAt: new Date().toISOString() });
   ['new-med-name','new-med-dose','new-med-freq','new-med-time'].forEach(id=>document.getElementById(id).value='');
   const meds = await DB.getByIndex('medications', 'patientId', currentUser.id);
   renderMedications(meds);
-  showToast('âœ… Medication saved to database!');
+  showToast('✅ Medication saved to database!');
 }
 
-// â”€â”€ UPLOAD RECORD (DB) â”€â”€
+// ── UPLOAD RECORD (DB) ──
 async function uploadRecord(input) {
   if (!currentUser || !input.files[0]) return;
   const file = input.files[0];
@@ -550,12 +549,12 @@ async function uploadRecord(input) {
     });
     const recs = await DB.getByIndex('records', 'patientId', currentUser.id);
     renderRecords(recs);
-    showToast('âœ… Record uploaded and saved!');
+    showToast('✅ Record uploaded and saved!');
   };
   reader.readAsDataURL(file);
 }
 
-// â”€â”€ SAVE VITALS (DB) â”€â”€
+// ── SAVE VITALS (DB) ──
 async function saveVitals() {
   if (!currentUser) return;
   const v = {
@@ -571,27 +570,27 @@ async function saveVitals() {
   await DB.add('vitals', v);
   renderVitals(v);
   ['v-hr','v-bp','v-temp','v-sugar','v-weight','v-spo2'].forEach(id=>document.getElementById(id).value='');
-  showToast('âœ… Vitals saved to database!');
+  showToast('✅ Vitals saved to database!');
 }
 
-// â”€â”€ SOS (DB) â”€â”€
+// ── SOS (DB) ──
 async function triggerSOS() {
   const log = { patientId: currentUser?.id||0, type:'SOS', location:'Hyderabad', status:'dispatched', triggeredAt: new Date().toISOString() };
   await DB.add('emergencies', log);
   const logEl = document.getElementById('sos-log');
   if (logEl) {
     logEl.innerHTML = `<div style="background:#FEF2F2;border:1.5px solid #FECACA;border-radius:12px;padding:14px;margin-bottom:10px">
-      <div style="font-weight:700;color:#DC2626;font-size:.88rem">ðŸš¨ SOS Triggered â€” ${new Date().toLocaleTimeString()}</div>
-      <div style="font-size:.78rem;color:var(--ink-light);margin-top:6px">âœ… Family notified &nbsp;Â·&nbsp; âœ… 3 Hospitals alerted &nbsp;Â·&nbsp; âœ… Ambulance dispatched<br>ðŸ“ Location shared automatically</div>
+      <div style="font-weight:700;color:#DC2626;font-size:.88rem">🚨 SOS Triggered — ${new Date().toLocaleTimeString()}</div>
+      <div style="font-size:.78rem;color:var(--ink-light);margin-top:6px">✅ Family notified &nbsp;·&nbsp; ✅ 3 Hospitals alerted &nbsp;·&nbsp; ✅ Ambulance dispatched<br>📍 Location shared automatically</div>
     </div>` + logEl.innerHTML;
   }
-  showToast('ðŸš¨ SOS sent! Ambulance dispatched. Family notified.');
+  showToast('🚨 SOS sent! Ambulance dispatched. Family notified.');
 }
 
-// â”€â”€ SIGN OUT â”€â”€
+// ── SIGN OUT ──
 function signOut() { DB.clearSession(); goPage('page-landing'); }
 
-// â”€â”€ WHATSAPP CHAT â”€â”€
+// ── WHATSAPP CHAT ──
 const WA_NUMBER = '919876543210'; // Replace with real number
 let waOpen = false;
 
@@ -617,17 +616,17 @@ function switchWaTab(tab, btn){
 }
 
 const waReplies = {
-  'book an appointment': "I can help you book an appointment! ðŸ“… Please tell me:\n1. Which specialty?\n2. Preferred date & time?\n3. Your city?\n\nOr click 'Book Appointment' to go directly to our booking page.",
-  'emergency sos help': "ðŸš¨ For emergencies, please:\nâ€¢ Press the **SOS button** in your dashboard\nâ€¢ Or call 108 immediately\n\nYour location will be shared with the nearest hospitals automatically.",
-  'view my health records': "ðŸ“‹ Your health records are securely stored in your E-Hospitee dashboard.\n\nI can help you:\nâ€¢ View prescriptions\nâ€¢ Access lab reports\nâ€¢ Share records with doctors",
-  'contact a doctor': "ðŸ©º To contact a doctor:\n1. Log in to your dashboard\n2. Go to Appointments\n3. Select your doctor and send a message\n\nWould you like me to connect you now?",
-  'show my health records': "Here are your latest records:\nðŸ“„ Lipid Profile â€” 8 Mar 2026\nðŸ©º Prescription Dr. Rao â€” 12 Feb\nðŸ§ª CBC Report â€” 10 Jan\n\nType the record name to view details.",
-  'medication reminders': "ðŸ’Š I'll send you daily medication reminders on WhatsApp!\n\nYour current schedule:\nâ€¢ Ecosprin 75mg â€” 8:00 AM âœ…\nâ€¢ Metoprolol 25mg â€” 8:00 PM â°\nâ€¢ Atorvastatin 10mg â€” 10:00 PM â°",
-  'lab reports update': "ðŸ§ª Your lab results are ready!\n\nLatest: **Lipid Profile** uploaded by Apollo Hospitals on 8 Mar 2026.\n\nTap 'View' in your Health Records to access the full report.",
-  'doctor consultation': "ðŸ©º Starting a doctor consultation...\n\nAvailable now:\nâ€¢ Dr. S. Rao â€” Cardiology âœ…\nâ€¢ Dr. P. Mehta â€” Ortho âœ…\nâ€¢ Dr. R. Gupta â€” General âœ…\n\nWhich doctor would you like to contact?",
-  'blood donor request': "ðŸ©¸ Searching for donors near you...\n\nFound 3 O+ donors within 5 km of Hyderabad.\n\nShall I send them an alert? They'll be notified on WhatsApp.",
-  'ambulance tracking': "ðŸš‘ Live ambulance tracking activated!\n\nAMB-02 is 4 minutes away.\nCurrent location: Jubilee Hills â†’ Your location\n\nYou'll receive live updates here.",
-  'default': "Thanks for reaching out! ðŸ˜Š I'm the E-Hospitee WhatsApp assistant.\n\nI can help with:\nðŸ“… Appointments\nðŸ“‹ Health records\nðŸ’Š Medications\nðŸš¨ Emergencies\nðŸ©º Doctor consultation\n\nWhat do you need help with?"
+  'book an appointment': "I can help you book an appointment! 📅 Please tell me:\n1. Which specialty?\n2. Preferred date & time?\n3. Your city?\n\nOr click 'Book Appointment' to go directly to our booking page.",
+  'emergency sos help': "🚨 For emergencies, please:\n• Press the **SOS button** in your dashboard\n• Or call 108 immediately\n\nYour location will be shared with the nearest hospitals automatically.",
+  'view my health records': "📋 Your health records are securely stored in your E-Hospitee dashboard.\n\nI can help you:\n• View prescriptions\n• Access lab reports\n• Share records with doctors",
+  'contact a doctor': "🩺 To contact a doctor:\n1. Log in to your dashboard\n2. Go to Appointments\n3. Select your doctor and send a message\n\nWould you like me to connect you now?",
+  'show my health records': "Here are your latest records:\n📄 Lipid Profile — 8 Mar 2026\n🩺 Prescription Dr. Rao — 12 Feb\n🧪 CBC Report — 10 Jan\n\nType the record name to view details.",
+  'medication reminders': "💊 I'll send you daily medication reminders on WhatsApp!\n\nYour current schedule:\n• Ecosprin 75mg — 8:00 AM ✅\n• Metoprolol 25mg — 8:00 PM ⏰\n• Atorvastatin 10mg — 10:00 PM ⏰",
+  'lab reports update': "🧪 Your lab results are ready!\n\nLatest: **Lipid Profile** uploaded by Apollo Hospitals on 8 Mar 2026.\n\nTap 'View' in your Health Records to access the full report.",
+  'doctor consultation': "🩺 Starting a doctor consultation...\n\nAvailable now:\n• Dr. S. Rao — Cardiology ✅\n• Dr. P. Mehta — Ortho ✅\n• Dr. R. Gupta — General ✅\n\nWhich doctor would you like to contact?",
+  'blood donor request': "🩸 Searching for donors near you...\n\nFound 3 O+ donors within 5 km of Hyderabad.\n\nShall I send them an alert? They'll be notified on WhatsApp.",
+  'ambulance tracking': "🚑 Live ambulance tracking activated!\n\nAMB-02 is 4 minutes away.\nCurrent location: Jubilee Hills → Your location\n\nYou'll receive live updates here.",
+  'default': "Thanks for reaching out! 😊 I'm the E-Hospitee WhatsApp assistant.\n\nI can help with:\n📅 Appointments\n📋 Health records\n💊 Medications\n🚨 Emergencies\n🩺 Doctor consultation\n\nWhat do you need help with?"
 };
 
 function getReply(msg){
@@ -642,7 +641,7 @@ function addMessage(text, type){
   const div = document.createElement('div');
   div.className = 'wa-msg wa-msg-'+type;
   div.innerHTML = text.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
-    + `<div class="wa-msg-time">${time}${type==='out'?' <span class="wa-tick">âœ“âœ“</span>':''}</div>`;
+    + `<div class="wa-msg-time">${time}${type==='out'?' <span class="wa-tick">✓✓</span>':''}</div>`;
   container.appendChild(div);
   container.scrollTop = container.scrollHeight;
 }
@@ -683,7 +682,7 @@ function handleWaKey(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sen
 function autoResize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,80)+'px'; }
 
 // Emoji picker
-const EMOJIS = ['ðŸ˜Š','ðŸ˜·','ðŸ’Š','ðŸ¥','â¤ï¸','ðŸ‘¨â€âš•ï¸','ðŸ©º','ðŸ©¸','ðŸš‘','ðŸ˜°','ðŸ¤’','ðŸ’‰','ðŸ§¬','ðŸ©»','ðŸƒ','ðŸ’ª','ðŸ§˜','ðŸ˜Œ','ðŸ™','âœ…','âš ï¸','ðŸ“‹','ðŸ“…','ðŸ””','ðŸ“ž','ðŸ’¬','ðŸ‘‹','ðŸ¤'];
+const EMOJIS = ['😊','😷','💊','🏥','❤️','👨‍⚕️','🩺','🩸','🚑','😰','🤒','💉','🧬','🩻','🏃','💪','🧘','😌','🙏','✅','⚠️','📋','📅','🔔','📞','💬','👋','🤝'];
 function buildEmojiGrid(){
   const g = document.getElementById('waEmojiGrid');
   EMOJIS.forEach(e=>{
@@ -700,7 +699,7 @@ buildEmojiGrid();
 
 function openWhatsApp(){ window.open('https://wa.me/'+WA_NUMBER+'?text=Hi+E-Hospitee!+I+need+help+with+my+appointment.','_blank'); }
 
-// â”€â”€ INIT LANDING REVEALS â”€â”€
+// ── INIT LANDING REVEALS ──
 setTimeout(()=>{
   const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
